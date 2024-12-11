@@ -1,5 +1,27 @@
-"use strict";
+// const Blockly = require('../lib/blockly/blockly_compressed.js');
+import Blockly from '../lib/blockly/blockly_compressed.js';
+import Python from '../lib/blockly/python_compressed.js';
+import Constants from '../lib/blockly/blocks_compressed.js';
+import Blocks from '../lib/blockly/blocks_compressed.js';
+import colour from '../lib/blockly/blocks_compressed.js';
 
+// import { DataflowAnalyzer } from '../lib/es6/data-flow.js';
+
+import * as pyAnalyzer from '../lib/es6/index.js';
+
+// import * as PyAnalyzer from '../lib/pyAnlayzer.js';
+// import python3 from '../lib/pyAnlayzer.js';
+
+
+// import _ from 'lodash-es';
+// import * as PyAnlayzer from '@msrvida/python-program-analysis';
+
+// import Sk from './skulpt_parser.js';
+// import CodeMirror from "../lib/codemirror/codemirror.js";
+
+
+"use strict";
+// const fs = require("fs");
 /**
  * Initialise the database of variable names.
  * @param {!Blockly.Workspace} workspace Workspace to generate code from.
@@ -264,9 +286,16 @@ function BlockMirror(configuration) {
   }
 
   this.textToBlocks = new BlockMirrorTextToBlocks(this);
+  this.blockAbstraction = new BlockAbstraction(this);
   this.textEditor = new BlockMirrorTextEditor(this);
   this.blockEditor = new BlockMirrorBlockEditor(this);
   this.setMode(this.configuration.viewMode);
+  
+  this.originalXml = "";
+  this.currentXml = "";
+
+  // this.pyAnalyzer = new DataflowAnalyzer();
+    
 }
 
 BlockMirror.prototype.validateConfiguration = function (configuration) {
@@ -329,46 +358,53 @@ BlockMirror.prototype.validateConfiguration = function (configuration) {
 };
 
 BlockMirror.prototype.initializeVariables = function () {
-  this.tags = {
-    'toolbar': document.createElement('div'),
-    'blockContainer': document.createElement('div'),
-    'blockEditor': document.createElement('div'),
-    'blockArea': document.createElement('div'),
-    'textSidebar': document.createElement('div'),
-    'textContainer': document.createElement('div'),
-    'textArea': document.createElement('textarea')
-  }; // Toolbar
 
-  this.configuration.container.appendChild(this.tags.toolbar); // Block side
+  this.tags = {};
 
-  this.configuration.container.appendChild(this.tags.blockContainer);
-  this.tags.blockContainer.appendChild(this.tags.blockEditor);
-  this.tags.blockContainer.appendChild(this.tags.blockArea); // Text side
+  if (typeof document !== "undefined") {
+    this.tags = {
+      'toolbar': document.createElement('div'),
+      'blockContainer': document.createElement('div'),
+      'blockEditor': document.createElement('div'),
+      'blockArea': document.createElement('div'),
+      'textSidebar': document.createElement('div'),
+      'textContainer': document.createElement('div'),
+      'textArea': document.createElement('textarea')
+    }; // Toolbar
 
-  this.configuration.container.appendChild(this.tags.textContainer);
-  this.tags.textContainer.appendChild(this.tags.textSidebar);
-  this.tags.textContainer.appendChild(this.tags.textArea);
+    this.configuration.container.appendChild(this.tags.toolbar); // Block side
 
-  for (var name in this.tags) {
-    this.tags[name].style['box-sizing'] = 'border-box';
-  } // Files
+    this.configuration.container.appendChild(this.tags.blockContainer);
+    this.tags.blockContainer.appendChild(this.tags.blockEditor);
+    this.tags.blockContainer.appendChild(this.tags.blockArea); // Text side
+
+    this.configuration.container.appendChild(this.tags.textContainer);
+    this.tags.textContainer.appendChild(this.tags.textSidebar);
+    this.tags.textContainer.appendChild(this.tags.textArea);
+
+    for (var name in this.tags) {
+      this.tags[name].style['box-sizing'] = 'border-box';
+    } // Files
 
 
-  this.code_ = "";
-  this.mode_ = null; // Update Flags
+    this.code_ = "";
+    this.mode_ = null; // Update Flags
 
-  this.silenceBlock = false;
-  this.silenceBlockTimer = null;
-  this.silenceText = false;
-  this.silenceModel = 0;
-  this.blocksFailed = false;
-  this.blocksFailedTimeout = null;
-  this.triggerOnChange = null;
-  this.firstEdit = true; // Toolbox width
+    this.silenceBlock = false;
+    this.silenceBlockTimer = null;
+    this.silenceText = false;
+    this.silenceModel = 0;
+    this.blocksFailed = false;
+    this.blocksFailedTimeout = null;
+    this.triggerOnChange = null;
+    this.firstEdit = true; // Toolbox width
 
-  this.blocklyToolboxWidth = 0; // Listeners
+    this.blocklyToolboxWidth = 0; // Listeners
 
-  this.listeners_ = [];
+    this.listeners_ = [];
+  }
+  
+  
 };
 
 BlockMirror.prototype.loadSkulpt = function () {
@@ -406,13 +442,24 @@ BlockMirror.prototype.fireChangeListener = function (event) {
   }
 };
 
+BlockMirror.prototype.summarizeBlock = function (linenum_list, quietly) {
+  this.blockEditor.summarizeBlock(linenum_list, true);
+  // this.textEditor.setCode(code, true);
+}
+
 BlockMirror.prototype.setCode = function (code, quietly) {
   this.code_ = code;
+  console.log("Set New Code!")
+  // this.originalXml = this.blockEditor.setCode(code, true);
+  console.log(this.originalXml);
 
   if (!quietly) {
-    this.blockEditor.setCode(code, true);
+    this.originalXml = this.blockEditor.setCode(code, true);
+    console.log(this.originalXml);
+    this.currentXml = this.originalXml;
     this.textEditor.setCode(code, true);
   }
+  // this.originalXml = this.blockEditor.setCode(code, true);
 
   this.fireChangeListener({
     'name': 'changed',
@@ -424,6 +471,11 @@ BlockMirror.prototype.getCode = function () {
   return this.code_;
 };
 
+BlockMirror.prototype.getXml = function () {
+  // console.log(this.originalXml);
+  return this.originalXml;
+};
+ 
 BlockMirror.prototype.getMode = function () {
   return this.mode_;
 };
@@ -458,9 +510,79 @@ BlockMirror.prototype.refresh = function () {
 };
 
 BlockMirror.prototype.forceBlockRefresh = function () {
-  this.blockEditor.setCode(this.code_, true);
+  this.originalXml = this.blockEditor.setCode(this.code_, true);
+  this.currentXml = this.originalXml;
 };
 
+BlockMirror.prototype.saveXml = function (python_source) {
+  debugger;
+  var xml = document.createElement("xml"); // Attempt parsing - might fail!
+
+  var parse,
+      ast = null,
+      symbol_table,
+      error;
+  var badChunks = [];
+  var originalSource = python_source;
+  this.source = python_source.split("\n");
+  var previousLine = 1 + this.source.length;
+  var filename = "temp";
+
+  while (ast === null) {
+    // parse = Sk.parse(filename, python_source);
+    // ast = Sk.astFromParse(parse.cst, filename, parse.flags);
+    try {
+      parse = Sk.parse(filename, python_source);
+      ast = Sk.astFromParse(parse.cst, filename, parse.flags);
+
+    } catch (e) {
+      //console.error(e);
+      error = e;
+
+      if (e.traceback && e.traceback.length && e.traceback[0].lineno && e.traceback[0].lineno < previousLine) {
+        previousLine = e.traceback[0].lineno - 1;
+        badChunks = badChunks.concat(this.source.slice(previousLine));
+        this.source = this.source.slice(0, previousLine);
+        python_source = this.source.join("\n");
+      } else {
+        //console.error(e);
+        xml.appendChild(BlockMirrorTextToBlocks.raw_block(originalSource));
+        // console.log(xml);
+        // this.textToBlocks.saveXml(xml);
+        return
+      }
+    }
+  }
+
+  this.comments = {};
+
+  for (var commentLocation in parse.comments) {
+    var lineColumn = commentLocation.split(",");
+    var yLocation = parseInt(lineColumn[0], 10);
+    var xLocation = parseInt(lineColumn[1], 10);
+    this.comments[yLocation] = xLocation + "|" + parse.comments[commentLocation];
+  }
+
+  this.highestLineSeen = 0;
+  this.levelIndex = 0;
+  this.nextExpectedLine = 0;
+  this.textToBlocks.measureNode(ast);
+  var converted = this.textToBlocks.convert(ast);
+
+  if (converted !== null) {
+    for (var block = 0; block < converted.length; block += 1) {
+      xml.appendChild(converted[block]);
+    }
+  }
+
+  if (badChunks.length) {
+    xml.appendChild(this.textToBlocks.raw_block(badChunks.join("\n")));
+  }
+
+  console.log(xml);
+  this.textToBlocks.saveXml(xml);
+}
+ 
 BlockMirror.prototype.VISIBLE_MODES = {
   'block': ['block', 'split'],
   'text': ['text', 'split']
@@ -473,6 +595,12 @@ BlockMirror.prototype.setHighlightedLines = function (lines, style) {
 
 BlockMirror.prototype.clearHighlightedLines = function () {
   this.textEditor.clearHighlightedLines(); //this.blockEditor.unhighlightLines(lines, style);
+};
+
+BlockMirror.prototype.abstractBlocks = function (blockList) {
+  this.blockAbstraction.abstractBlocks(blockList);
+  this.textEditor.codeMirror.refresh();
+
 };
 
 function BlockMirrorTextEditor(blockMirror) {
@@ -717,6 +845,11 @@ BlockMirrorTextEditor.prototype.VIEW_CONFIGURATIONS = {
     'visible': true,
     'indentSidebar': false
   },
+  'summary': {
+    'width': '40%',
+    'visible': true,
+    'indentSidebar': false
+  },
   'text': {
     'width': '100%',
     'visible': true,
@@ -750,6 +883,7 @@ BlockMirrorTextEditor.prototype.resizeResponsively = function () {
 };
 
 BlockMirrorTextEditor.prototype.setMode = function (mode) {
+  console.log("Set Mode in texteditor");
   mode = mode.toLowerCase();
   var configuration = this.VIEW_CONFIGURATIONS[mode]; // If there is an update waiting and we're visible, then update
 
@@ -812,7 +946,13 @@ BlockMirrorTextEditor.prototype.getCode = function () {
   return this.codeMirror.getValue();
 };
 
+// BlockMirrorTextEditor.prototype.getXml = function () {
+//   return this.currentXml = 
+// };
+
+
 BlockMirrorTextEditor.prototype.changed = function (codeMirror, event) {
+  console.log("Changed!")
   var _this3 = this;
 
   if (!this.silentEvents_) {
@@ -833,6 +973,7 @@ BlockMirrorTextEditor.prototype.changed = function (codeMirror, event) {
 
       this.updateTimer_ = setTimeout(handleChange, this.blockMirror.configuration.blockDelay);
     }
+    
   }
 
   this.silentEvents_ = false;
@@ -886,6 +1027,8 @@ function BlockMirrorBlockEditor(blockMirror) {
   this.blockContainer = blockMirror.tags.blockContainer;
   this.blockEditor = blockMirror.tags.blockEditor;
   this.blockArea = blockMirror.tags.blockArea; // Null, or the source of the last update
+
+  this._code = "";
 
   this.outOfDate_ = null; // Have to call BEFORE we inject, or Blockly will delete the css string!
 
@@ -1073,6 +1216,10 @@ BlockMirrorBlockEditor.prototype.VIEW_CONFIGURATIONS = {
   'text': {
     'width': '0%',
     'visible': false
+  },
+  'summary': {
+    'width': '60%',
+    'visible': true
   }
 };
 
@@ -1098,10 +1245,20 @@ BlockMirrorBlockEditor.prototype.resizeResponsively = function () {
 };
 
 BlockMirrorBlockEditor.prototype.setMode = function (mode) {
+  console.log("Mode Change!!");
   mode = mode.toLowerCase();
   var configuration = this.VIEW_CONFIGURATIONS[mode]; // Show/hide editor
 
   this.workspace.setVisible(configuration.visible);
+
+  if (mode == "summary") {
+    this.summarizeBlock([1, 8, 14, 17], true);
+  }
+  if (mode != "summary") {
+    console.log("Not summerized");
+    console.log(this._code);
+    this.setCode(this._code, true);
+  }
 
   if (configuration.visible) {
     this.blockEditor.style.width = '100%';
@@ -1125,7 +1282,8 @@ BlockMirrorBlockEditor.prototype.setMode = function (mode) {
 
 
 BlockMirrorBlockEditor.prototype.getCode = function () {
-  return Blockly.Python.workspaceToCode(this.workspace);
+  return this._code;
+  // return Blockly.Python.workspaceToCode(this.workspace);
 };
 /**
  * Attempts to update the model for the current code file from the
@@ -1133,8 +1291,142 @@ BlockMirrorBlockEditor.prototype.getCode = function () {
  * percolating.
  */
 
+BlockMirrorBlockEditor.prototype.summarizeBlock = function (linenum_list, quietly) {  
+  var code = this._code;
+    try {
+      var result = this.blockMirror.textToBlocks.convertSource('__main__.py', code);
+      
+      var flow = this.blockMirror.textToBlocks.analyzeSource('__main__.py', code);
+
+      var xml_code_original = Blockly.Xml.textToDom(result.xml);
+      var xml_code_summarized = Blockly.Xml.textToDom(result.xml);
+      var xml_elements = xml_code_summarized.documentElement;
+      console.log(xml_code_summarized);
+
+      let arr = new Array();
+
+      let block = xml_code_summarized.getElementsByTagName("block"); // food태그들을 모두 가져와 배열로 저장
+      
+      let newNodeList = [];
+
+      for (let linenum of linenum_list){
+        let newNode = document.createElement("block"); 
+        newNode.setAttribute("type", "ast_Call");
+        newNode.setAttribute("line_number", linenum.toString());
+        newNode.setAttribute("inline", "true");
+        newNodeList.push(newNode);
+      }
+
+      let mutateNodeList = [];
+      let nodeMutation = document.createElement("mutation")
+      nodeMutation.setAttribute("arguments", 1);
+      nodeMutation.setAttribute("message", "read_point_cloud");
+      nodeMutation.setAttribute("colour", 210);
+      nodeMutation.setAttribute("parameter", 210);
+      mutateNodeList.push(nodeMutation);
+
+      let nodeMutation2 = document.createElement("mutation")
+      nodeMutation2.setAttribute("arguments", 1);
+      nodeMutation2.setAttribute("message", "color_each_cluster");
+      nodeMutation2.setAttribute("colour", 210);
+      nodeMutation2.setAttribute("parameter", 210);
+      mutateNodeList.push(nodeMutation2)
+
+      let nodeMutation3 = document.createElement("mutation")
+      nodeMutation3.setAttribute("arguments", 4);
+      nodeMutation3.setAttribute("message", "set_bunny");
+      nodeMutation3.setAttribute("colour", 210);
+      nodeMutation3.setAttribute("parameter", 210);
+      mutateNodeList.push(nodeMutation3)
+
+      let nodeMutation4 = document.createElement("mutation")
+      nodeMutation4.setAttribute("arguments", 4);
+      nodeMutation4.setAttribute("message", "bunny_transform");
+      nodeMutation4.setAttribute("colour", 210);
+      nodeMutation4.setAttribute("parameter", 210);
+      mutateNodeList.push(nodeMutation4)
+
+      // for (let linenum of linenum_list){
+      //   let nodeMutation = document.createElement("mutation")
+      //   nodeMutation.setAttribute("arguments", 1);
+      //   nodeMutation.setAttribute("message", "read_point_cloud");
+      //   nodeMutation.setAttribute("colour", 210);
+      //   nodeMutation.setAttribute("parameter", 210);
+      // }
+
+
+      var firstNode = true;
+
+      // for(let block_node of block){ // 가져온 food태그들을 순회
+      //   // console.log("New Block!");
+      //   // console.log(newNode);
+      //   let blockLineNum = block_node.getAttribute("line_number");
+      //   // console.log(blockLineNum);
+      //   // console.log(typeof(blockLineNum));
+      //   // console.log(linenum_list.includes(Number(blockLineNum)));
+      //   if(linenum_list.includes(Number(blockLineNum)) && firstNode == true) {
+      //     // console.log("Found!")
+      //     // xml_code_summarized.replaceChild(newNode, block_node);
+      //     firstNode = false;
+      //   }
+      //   else if (linenum_list.includes(Number(blockLineNum))) {
+      //     // console.log("Remove!")
+      //     block_node.parentNode.removeChild(block_node);
+      //   }
+      //   // if (linenum_list.includes(Number(blockLineNum))) {
+      //   //   console.log("Remove!")
+      //   //   block_node.parentNode.removeChild(block_node);
+      //   // }
+      // }
+
+      let i = 0;
+
+      for(let block_node of block){ // 가져온 food태그들을 순회
+        let blockLineNum = block_node.getAttribute("line_number");
+        console.log(Number(blockLineNum));
+        console.log(linenum_list);
+        console.log(linenum_list.includes(Number(blockLineNum)));
+        if(linenum_list.includes(Number(blockLineNum))) {
+          console.log("Replace!!")
+          // block_node.setAttribute("type", "ast_Call");
+          newNodeList[i].appendChild(mutateNodeList[i]);
+          xml_code_summarized.replaceChild(newNodeList[i], block_node);
+          firstNode = false;
+          i = i+1;
+        }
+      }
+
+      console.log(xml_code_summarized);
+
+      this.workspace.clear();
+      // var id = ;
+      console.log("ID");
+      // console.log(xml_code);
+      console.log(Blockly.Xml.domToWorkspace(xml_code_summarized, this.workspace));
+
+      if (this.blockMirror.isParsons()) {
+        this.workspace.shuffle();
+      } else {
+        this.workspace.cleanUp();
+      }
+
+    } catch (error) {
+      console.error(error);
+    }
+
+    if (quietly) {
+      Blockly.Events.enable();
+    } else {
+      this.blockMirror.setCode(code, true);
+    }
+
+    this.outOfDate_ = null;
+};
+
 
 BlockMirrorBlockEditor.prototype.setCode = function (code, quietly) {
+  this._code = code;
+  var xml_code = "";
   if (this.isVisible()) {
     var result = this.blockMirror.textToBlocks.convertSource('__main__.py', code);
 
@@ -1143,9 +1435,14 @@ BlockMirrorBlockEditor.prototype.setCode = function (code, quietly) {
     }
 
     try {
-      var xml_code = Blockly.Xml.textToDom(result.xml);
+      xml_code = Blockly.Xml.textToDom(result.xml);
+      this.originalXml = xml_code;
+      
       this.workspace.clear();
-      Blockly.Xml.domToWorkspace(xml_code, this.workspace);
+      // var id = ;
+      console.log("ID");
+      console.log(xml_code);
+      console.log(Blockly.Xml.domToWorkspace(xml_code, this.workspace));
 
       if (this.blockMirror.isParsons()) {
         this.workspace.shuffle();
@@ -1166,6 +1463,7 @@ BlockMirrorBlockEditor.prototype.setCode = function (code, quietly) {
   } else {
     this.outOfDate_ = code;
   }
+  return xml_code;
 };
 
 BlockMirrorBlockEditor.prototype.BLOCKLY_CHANGE_EVENTS = [Blockly.Events.CREATE, Blockly.Events.DELETE, Blockly.Events.CHANGE, Blockly.Events.MOVE, Blockly.Events.VAR_RENAME];
@@ -1289,6 +1587,13 @@ BlockMirrorBlockEditor.prototype.highlightLines = function (lines, style) {// Ma
   });*/
 };
 
+function BlockAbstraction(blockMirror) {
+  this.blockMirror = blockMirror;
+  this.hiddenImports = ["plt"];
+  this.strictAnnotations = ['int', 'float', 'str', 'bool'];
+  Blockly.defineBlocksWithJsonArray(BlockMirrorTextToBlocks.BLOCKS);
+}
+
 function BlockMirrorTextToBlocks(blockMirror) {
   this.blockMirror = blockMirror;
   this.hiddenImports = ["plt"];
@@ -1298,6 +1603,24 @@ function BlockMirrorTextToBlocks(blockMirror) {
 
 BlockMirrorTextToBlocks.xmlToString = function (xml) {
   return new XMLSerializer().serializeToString(xml);
+};
+
+BlockMirrorTextToBlocks.prototype.saveXml = function (xml) {
+  var strXml = new XMLSerializer().serializeToString(xml);
+  // console.log(strXml)
+  // Requiring fs module in which
+  // writeFile function is defined.
+    
+  // Data which will write in a file.
+  // let data = strXml  
+  
+  // // Write data in 'Output.txt' .
+  // fs.writeFile('Output.txt', data, (err) => {
+  
+  //     // In case of a error throw err.
+  //     if (err) throw err;
+  // })
+  return strXml;
 };
 
 BlockMirrorTextToBlocks.prototype.convertSourceToCodeBlock = function (python_source) {
@@ -1398,6 +1721,31 @@ BlockMirrorTextToBlocks.prototype.convertSource = function (filename, python_sou
     'comments': this.comments,
     "rawXml": xml
   };
+};
+
+BlockMirrorTextToBlocks.prototype.analyzeSource = function (filename, python_source) {
+  console.log(python_source);
+  const codeLines = [
+    'x, y = 0, 0',
+    'while x < 10:',
+    '   y += x * 2',
+    '   x += 1',
+    'print(y)'
+  ];
+
+  console.log(codeLines);
+  let code = codeLines.concat('').join('\n'); // add newlines to end of every line.
+
+  // const tree1 = pyAnalyzer.parse(code); 
+  const tree = pyAnalyzer.parse(python_source); 
+  const cfg = new pyAnalyzer.ControlFlowGraph(tree);
+  const DFanalyzer = new pyAnalyzer.DataflowAnalyzer();
+  const flows = DFanalyzer.analyze(cfg).dataflows;
+  for (let flow of flows.items) 
+    console.log(pyAnalyzer.printNode(flow.fromNode) + 
+        " -----> " + pyAnalyzer.printNode(flow.toNode))
+
+  return flows;
 };
 
 BlockMirrorTextToBlocks.prototype.recursiveMeasure = function (node, nextBlockLine) {
@@ -1720,50 +2068,108 @@ BlockMirrorTextToBlocks.prototype.getChunkHeights = function (node) {
 };
 
 BlockMirrorTextToBlocks.create_block = function (type, lineNumber, fields, values, settings, mutations, statements) {
+  if (typeof document !== "undefined") {
+    var newBlock = document.createElement("block"); // Settings
+
+    newBlock.setAttribute("type", type);
+    newBlock.setAttribute("line_number", lineNumber);
+
+    for (var setting in settings) {
+      var settingValue = settings[setting];
+      newBlock.setAttribute(setting, settingValue);
+    } // Mutations
+
+
+    if (mutations !== undefined && Object.keys(mutations).length > 0) {
+      var newMutation = document.createElement("mutation");
+
+      for (var mutation in mutations) {
+        var mutationValue = mutations[mutation];
+
+        if (mutation.charAt(0) === '@') {
+          newMutation.setAttribute(mutation.substr(1), mutationValue);
+        } else if (mutationValue != null && mutationValue.constructor === Array) {
+          for (var i = 0; i < mutationValue.length; i++) {
+            var mutationNode = document.createElement(mutation);
+            mutationNode.setAttribute("name", mutationValue[i]);
+            newMutation.appendChild(mutationNode);
+          }
+        } else {
+          var _mutationNode = document.createElement("arg");
+
+          if (mutation.charAt(0) === '!') {
+            _mutationNode.setAttribute("name", "");
+          } else {
+            _mutationNode.setAttribute("name", mutation);
+          }
+
+          if (mutationValue !== null) {
+            _mutationNode.appendChild(mutationValue);
+          }
+
+          newMutation.appendChild(_mutationNode);
+        }
+      }
+
+      newBlock.appendChild(newMutation);
+    } // Fields
+
+
+    for (var field in fields) {
+      var fieldValue = fields[field];
+      var newField = document.createElement("field");
+      newField.setAttribute("name", field);
+      newField.appendChild(document.createTextNode(fieldValue));
+      newBlock.appendChild(newField);
+    } // Values
+
+
+    for (var value in values) {
+      var valueValue = values[value];
+      var newValue = document.createElement("value");
+
+      if (valueValue !== null) {
+        newValue.setAttribute("name", value);
+        newValue.appendChild(valueValue);
+        newBlock.appendChild(newValue);
+      }
+    } // Statements
+
+
+    if (statements !== undefined && Object.keys(statements).length > 0) {
+      for (var statement in statements) {
+        var statementValue = statements[statement];
+
+        if (statementValue == null) {
+          continue;
+        } else {
+          for (var _i3 = 0; _i3 < statementValue.length; _i3 += 1) {
+            // In most cases, you really shouldn't ever have more than
+            //  one statement in this list. I'm not sure Blockly likes
+            //  that.
+            var newStatement = document.createElement("statement");
+            newStatement.setAttribute("name", statement);
+            newStatement.appendChild(statementValue[_i3]);
+            newBlock.appendChild(newStatement);
+          }
+        }
+      }
+    }
+
+    return newBlock;
+  }  
+};
+
+BlockMirrorTextToBlocks.abstract_block = function (blockIds, fields, values, settings, statements) {
   var newBlock = document.createElement("block"); // Settings
 
-  newBlock.setAttribute("type", type);
-  newBlock.setAttribute("line_number", lineNumber);
+  newBlock.setAttribute("type", "abstraction");
+  newBlock.setAttribute("line_number", blockIds);
 
   for (var setting in settings) {
     var settingValue = settings[setting];
     newBlock.setAttribute(setting, settingValue);
   } // Mutations
-
-
-  if (mutations !== undefined && Object.keys(mutations).length > 0) {
-    var newMutation = document.createElement("mutation");
-
-    for (var mutation in mutations) {
-      var mutationValue = mutations[mutation];
-
-      if (mutation.charAt(0) === '@') {
-        newMutation.setAttribute(mutation.substr(1), mutationValue);
-      } else if (mutationValue != null && mutationValue.constructor === Array) {
-        for (var i = 0; i < mutationValue.length; i++) {
-          var mutationNode = document.createElement(mutation);
-          mutationNode.setAttribute("name", mutationValue[i]);
-          newMutation.appendChild(mutationNode);
-        }
-      } else {
-        var _mutationNode = document.createElement("arg");
-
-        if (mutation.charAt(0) === '!') {
-          _mutationNode.setAttribute("name", "");
-        } else {
-          _mutationNode.setAttribute("name", mutation);
-        }
-
-        if (mutationValue !== null) {
-          _mutationNode.appendChild(mutationValue);
-        }
-
-        newMutation.appendChild(_mutationNode);
-      }
-    }
-
-    newBlock.appendChild(newMutation);
-  } // Fields
 
 
   for (var field in fields) {
@@ -2825,6 +3231,11 @@ TOOLBOX_CATEGORY.DICTIONARIES = {
   colour: "DICTIONARY",
   blocks: ["{'1st key': ___, '2nd key': ___, '3rd key': ___}", "{}", "___['key']"]
 };
+TOOLBOX_CATEGORY.TEST = {
+  name: "Test",
+  colour: "TEXT",
+  blocks: ['""', "0", "True"]
+};
 BlockMirrorBlockEditor.prototype.TOOLBOXES = {
   //******************************************************
   'empty': [{
@@ -2920,7 +3331,12 @@ BlockMirrorBlockEditor.prototype.TOOLBOXES = {
     name: "Comments",
     colour: "PYTHON",
     blocks: ["# ", '"""\n"""']
+  }, {
+    name: "Abstraction",
+    colour: "PYTHON",
+    blocks: []
   }
+
   /*,
   {name: "Weird Stuff", colour: "PYTHON", blocks: [
     "delete ___",
@@ -3004,6 +3420,7 @@ BlockMirrorTextToBlocks.BLOCKS.push({
   "nextStatement": null,
   "colour": BlockMirrorTextToBlocks.COLOR.CONTROL
 });
+
 
 Blockly.Python['ast_For'] = function (block) {
   // For each loop.
@@ -8270,3 +8687,6 @@ Blockly.Python['ast_Raw'] = function (block) {
   var code = block.getFieldValue('TEXT') + "\n";
   return code;
 };
+
+export default BlockMirror;
+export {BlockMirrorBlockEditor, BlockMirrorTextEditor, BlockMirrorTextToBlocks};

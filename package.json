@@ -1,41 +1,29 @@
 {
-  "name": "blockmirror",
+  "name": "blockmirror_commomjs",
+  "type": "module",
   "version": "1.0.0",
-  "description": "A dual block/text editor using Blockly and CodeMirror for Python",
-  "main": "webpack.config.js",
+  "description": "",
+  "main": "app.js",
   "directories": {
-    "example": "example"
+    "doc": "docs",
+    "lib": "lib"
   },
   "scripts": {
-    "build": "webpack --mode production",
-    "devbuild": "webpack --mode development",
-    "watch": "webpack --watch --mode development"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "babel-node app.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/blockpy-edu/BlockMirror.git"
-  },
-  "author": "acbart",
+  "keywords": [],
+  "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/blockpy-edu/BlockMirror/issues"
-  },
-  "homepage": "https://github.com/blockpy-edu/BlockMirror#readme",
-  "devDependencies": {
-    "@babel/cli": "^7.10.5",
-    "@babel/core": "^7.11.1",
-    "@babel/plugin-transform-runtime": "^7.11.0",
-    "@babel/preset-env": "^7.11.0",
-    "babel-jest": "^24.9.0",
-    "babel-loader": "^8.1.0",
-    "babel-plugin-add-module-exports": "^1.0.2",
-    "elliptic": "^6.5.3",
-    "lodash": ">=4.17.19",
-    "uglify-js": "^3.10.1",
-    "webpack": "^4.44.1",
-    "webpack-cli": "^3.3.12",
-    "webpack-dev-server": "^3.11.0",
-    "webpack-merge-and-include-globally": "^2.1.25",
-    "yargs": "^15.4.1"
+  "dependencies": {
+    "@andrewhead/python-program-analysis": "^0.4.8",
+    "@babel/core": "^7.24.4",
+    "@babel/node": "^7.23.9",
+    "@babel/preset-env": "^7.24.4",
+    "@msrvida/python-program-analysis": "^0.4.1",
+    "@std/esm": "^0.26.0",
+    "express": "^4.19.2",
+    "lodash": "^4.17.21",
+    "lodash-es": "^4.17.21"
   }
 }
