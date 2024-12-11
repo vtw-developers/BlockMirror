@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Live Text Update</title>
+</head>
+<body>
+
+<label for="sourceText">Type Here:</label>
+<input type="text" id="sourceText" placeholder="Start typing...">
+
+<p>Output:</p>
+<div id="outputText"></div>
+
+<script>
+// Listen for input event on the sourceText input field
+document.getElementById('sourceText').addEventListener('input', function(event) {
+    // Update the outputText div with the typed text
+    document.getElementById('outputText').textContent = event.target.value;
+});
+</script>
+
+</body>
+</html>

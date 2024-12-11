@@ -1,0 +1,440 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="fe00182d-05fa-4529-8d2b-92bd952d65d2" name="Default Changelist" comment="Update random settings for pycharm">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/block_mirror.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/block_mirror.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/codemirror/python.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/codemirror/python.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ast/ast_Str.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/ast/ast_Str.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/block_mirror.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/block_mirror.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/text_editor.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/text_editor.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/toolbars.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/toolbars.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="JsFlowSettings">
+    <service-enabled>true</service-enabled>
+    <exe-path />
+    <other-services-enabled>true</other-services-enabled>
+    <auto-save>true</auto-save>
+  </component>
+  <component name="JsbtTreeLayoutManager">
+    <layout place="tools.popupnpm">
+      <scroll-view-position x="0" y="0" />
+      <selected-paths>
+        <path>
+          <id value="$PROJECT_DIR$/package.json" />
+          <id value="build" />
+        </path>
+      </selected-paths>
+    </layout>
+  </component>
+  <component name="JupyterTrust" id="82bc531b-95d0-4482-98de-a85a078dc6d0" />
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="1OR0VFaxkOvFIyHle2nZjV999OR" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="full.screen.before.presentation.mode" value="false" />
+    <property name="javascript.nodejs.core.library.configured.version" value="10.16.0" />
+    <property name="javascript.nodejs.core.library.typings.version" value="10.17.28" />
+    <property name="jsx.switch.disabled" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../pedal-edu/pedal" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+    <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\WebStorm 2019.1.3\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
+    <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/test/minimal_skulpt.html" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\acbart\Projects\blockpy-edu\BlockMirror\docs" />
+      <recent name="C:\Users\acbart\Projects\blockpy-edu\BlockMirror" />
+      <recent name="C:\Users\acbart\Projects\blockpy-edu\BlockMirror\test" />
+      <recent name="C:\Users\acbart\Projects\blockpy-edu\BlockMirror\src\ast" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\acbart\Projects\blockpy-edu\BlockMirror\src\ast" />
+    </key>
+  </component>
+  <component name="RunManager" selected="npm.devbuild">
+    <configuration name="simple_dev.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/BlockMirror/test/simple_dev.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <configuration name="simple.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/BlockMirror/test/simple.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <configuration name="devbuild" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="devbuild" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="skulpt" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="skulpt" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="watch" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="watch" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="JavaScript Debug.simple_dev.html" />
+      <item itemvalue="JavaScript Debug.simple.html" />
+      <item itemvalue="npm.devbuild" />
+      <item itemvalue="npm.skulpt" />
+      <item itemvalue="npm.watch" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="npm.devbuild" />
+        <item itemvalue="npm.watch" />
+        <item itemvalue="npm.skulpt" />
+        <item itemvalue="JavaScript Debug.simple.html" />
+        <item itemvalue="JavaScript Debug.simple_dev.html" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="project-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="fe00182d-05fa-4529-8d2b-92bd952d65d2" name="Default Changelist" comment="" />
+      <created>1563207713970</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1563207713970</updated>
+      <workItem from="1563207719048" duration="156052000" />
+      <workItem from="1563924743919" duration="259000" />
+      <workItem from="1563925130756" duration="17000" />
+      <workItem from="1563926206114" duration="40569000" />
+      <workItem from="1564112387987" duration="1691000" />
+      <workItem from="1564150717925" duration="4000" />
+      <workItem from="1564194355295" duration="6795000" />
+      <workItem from="1564373913220" duration="4347000" />
+      <workItem from="1564405679276" duration="275000" />
+      <workItem from="1564408427527" duration="88000" />
+      <workItem from="1564414212624" duration="4470000" />
+      <workItem from="1564662808985" duration="1025000" />
+      <workItem from="1564895575540" duration="1685000" />
+      <workItem from="1564949914358" duration="2354000" />
+      <workItem from="1565065547361" duration="2791000" />
+      <workItem from="1565112500562" duration="657000" />
+      <workItem from="1565131777631" duration="606000" />
+      <workItem from="1565155525428" duration="727000" />
+      <workItem from="1565448302616" duration="3755000" />
+      <workItem from="1565589434201" duration="9000" />
+      <workItem from="1565969606050" duration="2179000" />
+      <workItem from="1566167100835" duration="3839000" />
+      <workItem from="1566241913689" duration="745000" />
+      <workItem from="1566315290707" duration="2027000" />
+      <workItem from="1566318964440" duration="928000" />
+      <workItem from="1566325741808" duration="431000" />
+      <workItem from="1566413406432" duration="1849000" />
+      <workItem from="1566416990208" duration="595000" />
+      <workItem from="1566419199895" duration="1059000" />
+      <workItem from="1566462546230" duration="15000" />
+      <workItem from="1566485855097" duration="1907000" />
+      <workItem from="1566563017463" duration="16000" />
+      <workItem from="1567085840789" duration="2056000" />
+      <workItem from="1567195590761" duration="1369000" />
+      <workItem from="1567227774065" duration="6316000" />
+      <workItem from="1567366852789" duration="167000" />
+      <workItem from="1567517743281" duration="33000" />
+      <workItem from="1567777551526" duration="502000" />
+      <workItem from="1567883315726" duration="694000" />
+      <workItem from="1567964675434" duration="2672000" />
+      <workItem from="1568146240500" duration="2288000" />
+      <workItem from="1568400256383" duration="603000" />
+      <workItem from="1568432956949" duration="2302000" />
+      <workItem from="1568665354474" duration="1573000" />
+      <workItem from="1572464200305" duration="751000" />
+      <workItem from="1572827583856" duration="5884000" />
+      <workItem from="1573425794486" duration="2367000" />
+      <workItem from="1575315779702" duration="608000" />
+      <workItem from="1575553290520" duration="2962000" />
+      <workItem from="1575728911099" duration="573000" />
+      <workItem from="1575775946485" duration="246000" />
+      <workItem from="1581299520410" duration="907000" />
+      <workItem from="1581747741338" duration="1226000" />
+      <workItem from="1581787835886" duration="30000" />
+      <workItem from="1581787894709" duration="8205000" />
+      <workItem from="1582172961284" duration="310000" />
+      <workItem from="1590976436519" duration="23237000" />
+      <workItem from="1591121509240" duration="20663000" />
+      <workItem from="1592575579157" duration="734000" />
+      <workItem from="1593713031028" duration="2321000" />
+      <workItem from="1597004947052" duration="2601000" />
+      <workItem from="1597008678029" duration="1698000" />
+      <workItem from="1599262040647" duration="3212000" />
+      <workItem from="1599407604376" duration="1716000" />
+      <workItem from="1600102711337" duration="92000" />
+      <workItem from="1600102837112" duration="1218000" />
+      <workItem from="1600321775979" duration="1787000" />
+      <workItem from="1604885437423" duration="1411000" />
+      <workItem from="1608648143577" duration="1691000" />
+      <workItem from="1608733277773" duration="1611000" />
+      <workItem from="1609428623156" duration="3182000" />
+      <workItem from="1610644538411" duration="1184000" />
+      <workItem from="1610733372680" duration="13000" />
+      <workItem from="1611934159732" duration="1756000" />
+      <workItem from="1613143637361" duration="603000" />
+      <workItem from="1622211860596" duration="3027000" />
+      <workItem from="1634260054141" duration="230000" />
+      <workItem from="1640795597993" duration="10562000" />
+      <workItem from="1641066422705" duration="2338000" />
+      <workItem from="1641766804059" duration="3277000" />
+      <workItem from="1647296123971" duration="670000" />
+    </task>
+    <task id="LOCAL-00001" summary="Basics of packaging, bug fixes, better updating">
+      <created>1564063805490</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1564063805490</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Image URL support in editor">
+      <created>1591022795496</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1591022795496</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Skulpt Barebones Parser files">
+      <created>1591022903548</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1591022903548</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Minimal skulpt support now directly provided in a smaller package. Minor cleanup of code.">
+      <created>1591027419530</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1591027419530</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Fixed newline support in string literals; minor cleanups to match linter. Experimented with non-editable variable list.">
+      <created>1591030287360</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1591030287360</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Remove some logging that was unnecessary.">
+      <created>1593787583682</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1593787583682</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Hacks to make variable names case insensitive.">
+      <created>1593787611464</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1593787611464</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Track variable rename events in blockly.">
+      <created>1597005145324</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1597005145324</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Rebuilt as latest version, no significant changes.">
+      <created>1597069718576</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1597069718576</updated>
+    </task>
+    <task id="LOCAL-00010" summary="More robust error prevention for saving block images.">
+      <created>1600322287329</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1600322287329</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Allow first line syntax errors to be transformed into raw code blocks.">
+      <created>1600322306418</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1600322306418</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Dennis asked to remove one of the relational operators.">
+      <created>1600322325443</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1600322325444</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Ugh, seriously gotta remove the config from the repo.">
+      <created>1600322343022</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1600322343022</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Latest generated block_mirror.js file">
+      <created>1600322354358</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1600322354358</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Add in bar chart to plot toolbar">
+      <created>1609432245449</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1609432245449</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Add in empty toolbox category for error situations">
+      <created>1609432259042</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1609432259042</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Remove some project directories with computer change">
+      <created>1609432269193</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1609432269193</updated>
+    </task>
+    <task id="LOCAL-00018" summary="MIssing matplotlibg functions">
+      <created>1647296793014</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1647296793014</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Clean some code in unaryop">
+      <created>1647296814016</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1647296814016</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Update random settings for pycharm">
+      <created>1647296834752</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1647296834752</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Basics of packaging, bug fixes, better updating" />
+    <MESSAGE value="Image URL support in editor" />
+    <MESSAGE value="Skulpt Barebones Parser files" />
+    <MESSAGE value="Minimal skulpt support now directly provided in a smaller package. Minor cleanup of code." />
+    <MESSAGE value="Fixed newline support in string literals; minor cleanups to match linter. Experimented with non-editable variable list." />
+    <MESSAGE value="Remove some logging that was unnecessary." />
+    <MESSAGE value="Hacks to make variable names case insensitive." />
+    <MESSAGE value="Track variable rename events in blockly." />
+    <MESSAGE value="Rebuilt as latest version, no significant changes." />
+    <MESSAGE value="More robust error prevention for saving block images." />
+    <MESSAGE value="Allow first line syntax errors to be transformed into raw code blocks." />
+    <MESSAGE value="Dennis asked to remove one of the relational operators." />
+    <MESSAGE value="Ugh, seriously gotta remove the config from the repo." />
+    <MESSAGE value="Latest generated block_mirror.js file" />
+    <MESSAGE value="Add in bar chart to plot toolbar" />
+    <MESSAGE value="Add in empty toolbox category for error situations" />
+    <MESSAGE value="Remove some project directories with computer change" />
+    <MESSAGE value="MIssing matplotlibg functions" />
+    <MESSAGE value="Clean some code in unaryop" />
+    <MESSAGE value="Update random settings for pycharm" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update random settings for pycharm" />
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ScopeChooserConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>
