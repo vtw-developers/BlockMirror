@@ -5,7 +5,7 @@ import Constants from '../lib/blockly/blocks_compressed.js';
 import Blocks from '../lib/blockly/blocks_compressed.js';
 import colour from '../lib/blockly/blocks_compressed.js';
 
-// import { DataflowAnalyzer } from '../lib/es6/data-flow.js';
+import { DataflowAnalyzer } from '../lib/es6/data-flow.js';
 
 import * as pyAnalyzer from '../lib/es6/index.js';
 
@@ -1317,34 +1317,34 @@ BlockMirrorBlockEditor.prototype.summarizeBlock = function (linenum_list, quietl
         newNodeList.push(newNode);
       }
 
-      let mutateNodeList = [];
-      let nodeMutation = document.createElement("mutation")
-      nodeMutation.setAttribute("arguments", 1);
-      nodeMutation.setAttribute("message", "read_point_cloud");
-      nodeMutation.setAttribute("colour", 210);
-      nodeMutation.setAttribute("parameter", 210);
-      mutateNodeList.push(nodeMutation);
+      // let mutateNodeList = [];
+      // let nodeMutation = document.createElement("mutation")
+      // nodeMutation.setAttribute("arguments", 1);
+      // nodeMutation.setAttribute("message", "read_point_cloud");
+      // nodeMutation.setAttribute("colour", 210);
+      // nodeMutation.setAttribute("parameter", 210);
+      // mutateNodeList.push(nodeMutation);
 
-      let nodeMutation2 = document.createElement("mutation")
-      nodeMutation2.setAttribute("arguments", 1);
-      nodeMutation2.setAttribute("message", "color_each_cluster");
-      nodeMutation2.setAttribute("colour", 210);
-      nodeMutation2.setAttribute("parameter", 210);
-      mutateNodeList.push(nodeMutation2)
+      // let nodeMutation2 = document.createElement("mutation")
+      // nodeMutation2.setAttribute("arguments", 1);
+      // nodeMutation2.setAttribute("message", "color_each_cluster");
+      // nodeMutation2.setAttribute("colour", 210);
+      // nodeMutation2.setAttribute("parameter", 210);
+      // mutateNodeList.push(nodeMutation2)
 
-      let nodeMutation3 = document.createElement("mutation")
-      nodeMutation3.setAttribute("arguments", 4);
-      nodeMutation3.setAttribute("message", "set_bunny");
-      nodeMutation3.setAttribute("colour", 210);
-      nodeMutation3.setAttribute("parameter", 210);
-      mutateNodeList.push(nodeMutation3)
+      // let nodeMutation3 = document.createElement("mutation")
+      // nodeMutation3.setAttribute("arguments", 4);
+      // nodeMutation3.setAttribute("message", "set_bunny");
+      // nodeMutation3.setAttribute("colour", 210);
+      // nodeMutation3.setAttribute("parameter", 210);
+      // mutateNodeList.push(nodeMutation3)
 
-      let nodeMutation4 = document.createElement("mutation")
-      nodeMutation4.setAttribute("arguments", 4);
-      nodeMutation4.setAttribute("message", "bunny_transform");
-      nodeMutation4.setAttribute("colour", 210);
-      nodeMutation4.setAttribute("parameter", 210);
-      mutateNodeList.push(nodeMutation4)
+      // let nodeMutation4 = document.createElement("mutation")
+      // nodeMutation4.setAttribute("arguments", 4);
+      // nodeMutation4.setAttribute("message", "bunny_transform");
+      // nodeMutation4.setAttribute("colour", 210);
+      // nodeMutation4.setAttribute("parameter", 210);
+      // mutateNodeList.push(nodeMutation4)
 
       // for (let linenum of linenum_list){
       //   let nodeMutation = document.createElement("mutation")
@@ -1725,16 +1725,16 @@ BlockMirrorTextToBlocks.prototype.convertSource = function (filename, python_sou
 
 BlockMirrorTextToBlocks.prototype.analyzeSource = function (filename, python_source) {
   console.log(python_source);
-  const codeLines = [
-    'x, y = 0, 0',
-    'while x < 10:',
-    '   y += x * 2',
-    '   x += 1',
-    'print(y)'
-  ];
+  // const codeLines = [
+  //   'x, y = 0, 0',
+  //   'while x < 10:',
+  //   '   y += x * 2',
+  //   '   x += 1',
+  //   'print(y)'
+  // ];
 
-  console.log(codeLines);
-  let code = codeLines.concat('').join('\n'); // add newlines to end of every line.
+  // console.log(codeLines);
+  // let code = codeLines.concat('').join('\n'); // add newlines to end of every line.
 
   // const tree1 = pyAnalyzer.parse(code); 
   const tree = pyAnalyzer.parse(python_source); 

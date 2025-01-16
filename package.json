@@ -1,5 +1,5 @@
 {
-  "name": "blockmirror_commomjs",
+  "name": "blockmirror",
   "type": "module",
   "version": "1.0.0",
   "description": "",
@@ -22,7 +22,7 @@
     "@babel/preset-env": "^7.24.4",
     "@msrvida/python-program-analysis": "^0.4.1",
     "@std/esm": "^0.26.0",
-    "express": "^4.19.2",
+    "express": "^4.21.2",
     "lodash": "^4.17.21",
     "lodash-es": "^4.17.21"
   }
